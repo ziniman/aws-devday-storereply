@@ -1,0 +1,125 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Store and reply to user messages.
+Outputs:
+  StoreAndReplyAPI:
+    Description: API Gateway endpoint URL for Prod stage for StoreAndReplyAPI function
+    Value:
+      Fn::Sub: https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/prod/send/
+  StoreAndReplyQueue:
+    Description: SQS queue processed by the StoreAndReplySQS function
+    Value:
+      Fn::GetAtt:
+      - StoreAndReplyQueue
+      - QueueName
+Resources:
+  MessagesTable:
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: user
+        AttributeType: S
+      - AttributeName: timestamp
+        AttributeType: N
+      BillingMode: PAY_PER_REQUEST
+      KeySchema:
+      - AttributeName: user
+        KeyType: HASH
+      - AttributeName: timestamp
+        KeyType: RANGE
+    Type: AWS::DynamoDB::Table
+  MyApi:
+    Properties:
+      StageName: prod
+      TracingEnabled: true
+    Type: AWS::Serverless::Api
+  StoreAndReplyAPIFunction:
+    Properties:
+      AutoPublishAlias: live
+      CodeUri: s3://boazz-packages/553fcc26382b9dddaf3bcb27e29cabc2
+      DeploymentPreference:
+        Type: Linear10PercentEvery1Minute
+      Environment:
+        Variables:
+          MESSAGES_TABLE:
+            Ref: MessagesTable
+          METRIC_DIMENSION_NAME: Interface
+          METRIC_DIMENSION_VALUE: API
+          METRIC_NAME: Message Chars
+          METRIC_NAMESPACE:
+            Ref: AWS::StackName
+          REPLY_LANGUAGE: en
+          REPLY_MESSAGE: Good Morning London! Message submitted via API
+      Events:
+        GetResource:
+          Properties:
+            Method: GET
+            Path: /send
+            RestApiId:
+              Ref: MyApi
+          Type: Api
+      Handler: adapterAPI.handler
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: MessagesTable
+      - Statement:
+        - Action:
+          - comprehend:DetectDominantLanguage
+          - translate:TranslateText
+          Effect: Allow
+          Resource: '*'
+      - Statement:
+        - Action:
+          - cloudwatch:putMetricData
+          Effect: Allow
+          Resource: '*'
+      Runtime: nodejs8.10
+      Tracing: Active
+    Type: AWS::Serverless::Function
+  StoreAndReplyQueue:
+    Type: AWS::SQS::Queue
+  StoreAndReplySQSFunction:
+    Properties:
+      AutoPublishAlias: live
+      CodeUri: s3://boazz-packages/dd3ae2fbb7f513bb722cbb4eb20964f0
+      DeploymentPreference:
+        Type: AllAtOnce
+      Environment:
+        Variables:
+          MESSAGES_TABLE:
+            Ref: MessagesTable
+          METRIC_DIMENSION_NAME: Interface
+          METRIC_DIMENSION_VALUE: SQS
+          METRIC_NAME: Message Chars
+          METRIC_NAMESPACE:
+            Ref: AWS::StackName
+          REPLY_LANGUAGE: en
+          REPLY_MESSAGE: Message submitted via SQS
+      Events:
+        MySQSEvent:
+          Properties:
+            BatchSize: 10
+            Queue:
+              Fn::GetAtt:
+              - StoreAndReplyQueue
+              - Arn
+          Type: SQS
+      Handler: adapterSQS.handler
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: MessagesTable
+      - Statement:
+        - Action:
+          - comprehend:DetectDominantLanguage
+          - translate:TranslateText
+          Effect: Allow
+          Resource: '*'
+      - Statement:
+        - Action:
+          - cloudwatch:putMetricData
+          Effect: Allow
+          Resource: '*'
+      Runtime: nodejs8.10
+      Tracing: Active
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
