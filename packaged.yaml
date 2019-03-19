@@ -34,7 +34,7 @@ Resources:
   StoreAndReplyAPIFunction:
     Properties:
       AutoPublishAlias: live
-      CodeUri: s3://boazz-packages/553fcc26382b9dddaf3bcb27e29cabc2
+      CodeUri: s3://boazz-packages/6311420c4fa1fc336fb8ec525c79a95b
       DeploymentPreference:
         Type: Linear10PercentEvery1Minute
       Environment:
@@ -80,7 +80,7 @@ Resources:
   StoreAndReplySQSFunction:
     Properties:
       AutoPublishAlias: live
-      CodeUri: s3://boazz-packages/dd3ae2fbb7f513bb722cbb4eb20964f0
+      CodeUri: s3://boazz-packages/39a7435caad397427f7e6bbccf0a15f3
       DeploymentPreference:
         Type: AllAtOnce
       Environment:

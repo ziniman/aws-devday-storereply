@@ -62,3 +62,5 @@ typings/
 
 *.sh
 .aws-sam
+configs
+.DS_Store
