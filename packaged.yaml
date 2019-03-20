@@ -34,7 +34,7 @@ Resources:
   StoreAndReplyAPIFunction:
     Properties:
       AutoPublishAlias: live
-      CodeUri: s3://boazz-packages/6311420c4fa1fc336fb8ec525c79a95b
+      CodeUri: s3://boazz-packages/b07297d598bf06868475293ce63a0d57
       DeploymentPreference:
         Type: Linear10PercentEvery1Minute
       Environment:
@@ -47,7 +47,7 @@ Resources:
           METRIC_NAMESPACE:
             Ref: AWS::StackName
           REPLY_LANGUAGE: en
-          REPLY_MESSAGE: Good Morning London! Message submitted via API
+          REPLY_MESSAGE: Good Morning Tel Aviv! Message submitted via API
       Events:
         GetResource:
           Properties:
@@ -80,7 +80,7 @@ Resources:
   StoreAndReplySQSFunction:
     Properties:
       AutoPublishAlias: live
-      CodeUri: s3://boazz-packages/39a7435caad397427f7e6bbccf0a15f3
+      CodeUri: s3://boazz-packages/3a7f0e6186cdd82a15424cc65a1dfd0c
       DeploymentPreference:
         Type: AllAtOnce
       Environment:
