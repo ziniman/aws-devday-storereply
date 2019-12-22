@@ -22,7 +22,7 @@ Resources:
       ReservedConcurrentExecutions: 5
       DeploymentPreference:
 #         Type: Canary10Percent5Minutes
-          Type: Linear20PercentEvery1Minute
+          Type: Linear10PercentEvery1Minute
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref MessagesTable
