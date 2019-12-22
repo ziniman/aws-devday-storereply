@@ -19,7 +19,7 @@ Resources:
       Tracing: Active
       AutoPublishAlias: live
       VersionDescription: 'Demo'
-      ReservedConcurrentExecutions: 5
+      ProvisionedConcurrencyConfig: 5
       DeploymentPreference:
 #         Type: Canary10Percent5Minutes
           Type: Linear10PercentEvery1Minute
@@ -40,7 +40,7 @@ Resources:
       Environment:
         Variables:
           MESSAGES_TABLE: !Ref MessagesTable
-          REPLY_MESSAGE: 'Good Evening Test! Message submitted via API'
+          REPLY_MESSAGE: 'Good Evening Tel Aviv! Message submitted via API'
           REPLY_LANGUAGE: 'en'
           METRIC_NAMESPACE: !Ref AWS::StackName
           METRIC_DIMENSION_NAME: 'Interface'
