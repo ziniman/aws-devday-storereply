@@ -19,7 +19,7 @@ Resources:
       Tracing: Active
       AutoPublishAlias: live
       VersionDescription: 'Demo'
-      ReservedConcurrentExecutions: live
+      ReservedConcurrentExecutions: 5
       DeploymentPreference:
 #         Type: Canary10Percent5Minutes
           Type: Linear20PercentEvery1Minute
