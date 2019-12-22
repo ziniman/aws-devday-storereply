@@ -18,9 +18,11 @@ Resources:
       CodeUri: src/
       Tracing: Active
       AutoPublishAlias: live
+      VersionDescription: 'Demo'
+      ReservedConcurrentExecutions: live
       DeploymentPreference:
 #         Type: Canary10Percent5Minutes
-          Type: Linear10PercentEvery1Minute
+          Type: Linear20PercentEvery1Minute
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref MessagesTable
