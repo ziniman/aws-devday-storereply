@@ -19,7 +19,8 @@ Resources:
       Tracing: Active
       AutoPublishAlias: live
       VersionDescription: 'Demo'
-      ProvisionedConcurrencyConfig: 5
+      ProvisionedConcurrencyConfig:
+          ProvisionedConcurrentExecutions: 5
       DeploymentPreference:
 #         Type: Canary10Percent5Minutes
           Type: Linear10PercentEvery1Minute
