@@ -7,8 +7,10 @@ const StoreAndReply = require('./StoreAndReply');
 exports.handler = async (event, context) => {
 
     function buildResponse(replyMessage) {
+        console.log(context);
         const responseBody = {
-            message: replyMessage
+            message: replyMessage,
+            version: 'a'
         };
         const response = {
             statusCode: 200,
