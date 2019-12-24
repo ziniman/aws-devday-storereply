@@ -13,7 +13,8 @@ exports.handler = async (event, context) => {
         const response = {
             statusCode: 200,
             headers: {
-              'Content-Type' : 'application/json'
+              'Content-Type' : 'application/json',
+              'Access-Control-Allow-Origin': '*'
             },
             body: JSON.stringify(responseBody)
         };
@@ -29,6 +30,6 @@ exports.handler = async (event, context) => {
         user = event.queryStringParameters.user;
         message = event.queryStringParameters.message;
     }
-    
+
     return buildResponse(await StoreAndReply.process(user, message));
 };

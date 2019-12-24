@@ -14,7 +14,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: adapterAPI.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs10
       CodeUri: src/
       Tracing: Active
       AutoPublishAlias: live
