@@ -7,7 +7,7 @@ const StoreAndReply = require('./StoreAndReply');
 exports.handler = async (event, context) => {
 
     function buildResponse(replyMessage) {
-        console.log(context);
+        console.log(JSON.stringify(context));
         const responseBody = {
             message: replyMessage,
             version: 'a'

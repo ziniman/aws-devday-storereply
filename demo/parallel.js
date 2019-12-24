@@ -1,24 +1,29 @@
-// PARALLEL REQUESTS
-var url = 'https://232ojnqspg.execute-api.eu-west-1.amazonaws.com/send?user=boaz&message=Hello'
+// Example POST method implementation:
+const url = 'https://232ojnqspg.execute-api.eu-west-1.amazonaws.com/send?user=boaz&message=Hello';
 
-try {
-  (async function() {
-    const data = await postData(url);
-    console.log(JSON.stringify(data)); // JSON-string from `response.json()` call
+(async function() {
+    try {
+        var start = performance.now();
+        const data = await postData(url);
+        console.log(JSON.stringify(data));
+        var end = performance.now();
+        console.log("Lambda Call took " + (end - start) + " milliseconds.");
+    }catch (error) {
+      console.error(error);
+    }
   })();
-} catch (error) {
-  console.error(error);
-}
 
 async function postData(url) {
-    const response = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      mode: 'no-cors'
-    });
-    await console.log(response);
-    data = await response.json(); // parses JSON response into native JavaScript objects
-    await console.log(data);
-    return data
+  const response = await fetch(url, {
+    method: 'GET',
+    mode: 'cors',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow'
+  });
+  await console.log(response);
+  return await response.json(); // parses JSON response into native JavaScript objects
 }
