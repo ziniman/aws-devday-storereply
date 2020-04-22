@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
         console.log(JSON.stringify(context));
         const responseBody = {
             message: replyMessage,
-            version: 'a'
+            version: 'b'
         };
         const response = {
             statusCode: 200,
