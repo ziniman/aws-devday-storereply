@@ -14,7 +14,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: adapterAPI.handler
-      Runtime: nodejs10.x
+      Runtime: nodejs12.x
       CodeUri: src/
       Tracing: Active
       AutoPublishAlias: live
@@ -60,7 +60,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: adapterSQS.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       CodeUri: src/
       Tracing: Active
       AutoPublishAlias: live
