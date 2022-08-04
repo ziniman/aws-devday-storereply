@@ -7,8 +7,8 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 12
-      python: 3.8
+      nodejs: 14
+      python: 3.9
     commands:
       - pip install --upgrade awscli aws-sam-cli
       - sam --version
