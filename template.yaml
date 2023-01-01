@@ -42,7 +42,7 @@ Resources:
       Environment:
         Variables:
           MESSAGES_TABLE: !Ref MessagesTable
-          REPLY_MESSAGE: 'Hello Tel Aviv! Message submitted via API '
+          REPLY_MESSAGE: 'Hello Milan! Message submitted via API '
           REPLY_LANGUAGE: 'en'
           METRIC_NAMESPACE: !Ref AWS::StackName
           METRIC_DIMENSION_NAME: 'Interface'
