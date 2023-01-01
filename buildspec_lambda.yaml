@@ -10,6 +10,7 @@ phases:
       nodejs: 12
       python: 3.8
     commands:
+      - pip install --upgrade pip
       - pip install --upgrade awscli aws-sam-cli
       - sam --version
   build:
