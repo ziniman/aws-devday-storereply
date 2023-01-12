@@ -23,7 +23,7 @@ Resources:
           ProvisionedConcurrentExecutions: 2
       DeploymentPreference:
 #         Type: Canary10Percent5Minutes
-          Type: Linear20PercentEvery1Minute
+          Type: Linear10PercentEvery1Minute
 #         Type: AllAtOnce
       Policies:
         - DynamoDBCrudPolicy:
@@ -42,7 +42,7 @@ Resources:
       Environment:
         Variables:
           MESSAGES_TABLE: !Ref MessagesTable
-          REPLY_MESSAGE: 'Hello Tel Aviv! Message submitted via API '
+          REPLY_MESSAGE: 'Hello Beer Sheva! Message submitted via API '
           REPLY_LANGUAGE: 'en'
           METRIC_NAMESPACE: !Ref AWS::StackName
           METRIC_DIMENSION_NAME: 'Interface'
